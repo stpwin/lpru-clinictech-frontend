@@ -1,0 +1,39 @@
+@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap');
+
+.justify-content-center {
+    justify-content: center!important;
+}
+
+body {
+  margin: 0;
+  font-family: 'Mitr', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.navbar-nav a {
+    color: rgb(255, 255, 255);
+    border-top: 3px solid transparent;
+    border-radius: 0px;
+    transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+    text-align: center;
+}
+
+.navbar-nav a:hover {
+    color: rgb(255, 255, 255); 
+    border-top: 3px solid;
+    border-radius: 1px;
+    text-decoration: none;
+}
+
+.navbar-nav a.active {
+    color: rgb(255, 255, 255); 
+    border-top: 3px solid;
+    border-radius: 1px;
+}
+
+.navbar-nav a {
+    margin: .5rem;
+    width: 160px;
+}
