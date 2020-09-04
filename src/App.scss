@@ -35,5 +35,49 @@ body {
 
 .navbar-nav a {
     margin: .5rem;
-    width: 160px;
+    min-width: 100px;
+}
+
+
+.card-slide {
+    display: flex;
+    flex-flow: column wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    // overflow: hidden;
+    height: 350px;
+    
+}
+
+.card-slide .card {
+    // flex: 1 0;
+    margin-right: 15px;
+    margin-bottom: 0;
+    margin-left: 15px;
+}
+
+.card-title.h5 {
+    font-size: smaller;
+}
+
+.accordion .card-title.h5 {
+    // font-size: smaller;
+    text-align: center;
+}
+
+.accordion .card-text  {
+    font-size: smaller;
+    text-align: center;
+}
+
+.card-text {
+    font-size: x-small;
+    
+}
+
+.btn-xs {
+    padding: 0.25rem 0.25rem;
+    font-size: 0.65rem;
+    line-height: 1;
+    border-radius: 0.2rem;
 }

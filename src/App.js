@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+// import "holderjs";
 
 import Navigation from './components/Navbar'
 import Banner from './components/Banner'
