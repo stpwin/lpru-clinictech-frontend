@@ -3,8 +3,9 @@ import React, { Component } from 'react'
 // import CustomScroll from "react-custom-scroll";
 import { Scrollbars } from "react-custom-scrollbars";
 import {Container} from 'react-bootstrap'
-import CardItem from './CardItem';
+
 import { Link } from 'react-router-dom';
+import NewsList from '../News/NewsList';
 
 export class News extends Component {
   render() {
@@ -13,30 +14,18 @@ export class News extends Component {
         <Container>
           <h1 className='text-center mt-5'>ข่าวประชาสัมพันธ์</h1>
           <div className='float-right'>
-            <Link to="/News">แสดงทั้งหมด</Link>
+            <Link to='/News'>แสดงทั้งหมด</Link>
           </div>
           <br></br>
-          <Scrollbars autoHeight autoHeightMin={350} autoHeightMax={350}>
+          <Scrollbars autoHeight autoHeightMin={400} autoHeightMax={450}>
             <div className='card-slide'>
-              <NewsItem />
-              <NewsItem />
-              <NewsItem />
-              <NewsItem />
-              <NewsItem />
-              <NewsItem />
-              <NewsItem />
+              <NewsList />
             </div>
           </Scrollbars>
         </Container>
       </div>
     );
   }
-}
-
-const NewsItem = ({ }) => {
-  return (
-    <CardItem />
-  );
 }
 
 export default News

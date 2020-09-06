@@ -10,12 +10,12 @@ export class Home extends Component {
   }
   render() {
     return (
-      <div>
+      <>
         <Carousel>
           <Carousel.Item>
             <img
               className='d-block w-100'
-              src='holder.js/1920x400?text=First slide&bg=373940'
+              src='holder.js/1920x400?text= &bg=373940'
               alt='First slide'
             />
             <Carousel.Caption>
@@ -26,7 +26,7 @@ export class Home extends Component {
           <Carousel.Item>
             <img
               className='d-block w-100'
-              src='holder.js/1920x400?text=Second slide&bg=282c34'
+              src='holder.js/1920x400?text= &bg=282c34'
               alt='Third slide'
             />
 
@@ -38,7 +38,7 @@ export class Home extends Component {
           <Carousel.Item>
             <img
               className='d-block w-100'
-              src='holder.js/1920x400?text=Third slide&bg=20232a'
+              src='holder.js/1920x400?text= &bg=20232a'
               alt='Third slide'
             />
 
@@ -55,7 +55,7 @@ export class Home extends Component {
         <Activities />
         
 
-      </div>
+      </>
     );
   }
 }

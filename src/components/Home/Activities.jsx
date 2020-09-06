@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 
 import { Scrollbars } from "react-custom-scrollbars";
 import { Container } from "react-bootstrap";
-import CardItem from "./CardItem";
+
 import { Link } from "react-router-dom";
+
+import GalleryList from "../Gallery/GalleryList";
 
 export class Activities extends Component {
   render() {
@@ -13,15 +15,9 @@ export class Activities extends Component {
         <div className='float-right'>
           <Link to='/Gallery'>แสดงทั้งหมด</Link>
         </div>
-        <Scrollbars autoHeight autoHeightMin={350} autoHeightMax={350}>
+        <Scrollbars autoHeight autoHeightMin={40} autoHeightMax={450}>
           <div className='card-slide'>
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
+            <GalleryList />
           </div>
         </Scrollbars>
       </Container>
@@ -29,7 +25,7 @@ export class Activities extends Component {
   }
 }
 
-const GalleryItem = ({}) => <CardItem />;
+
 
 
 export default Activities;
