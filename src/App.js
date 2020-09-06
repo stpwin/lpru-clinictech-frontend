@@ -5,11 +5,14 @@ import './App.css';
 import Navigation from './components/Navbar'
 import Banner from './components/Banner'
 import Footer from './components/Footer';
-// import { Container } from 'react-bootstrap';
 import Home from './components/Home'
 import About from "./components/About";
 import Downloads from "./components/Downloads";
 import Notfound from './components/Notfound'
+import News from "./components/News";
+import ShowNews from "./components/News/ShowNews"
+import Specialist from "./components/Specialist";
+import {GalleryPage, ShowGallery} from "./components/Gallery";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -22,12 +25,16 @@ function App() {
         <div>
           <Route exact path='/' component={Home} />
           <Route path='/about' component={About} />
+          <Route path='/specialist' component={Specialist} />
+          <Route exact path='/downloads' component={Downloads} />
+          <Route exact path='/news' component={News} />
+          <Route path='/news/:id' component={ShowNews} />
+          <Route exact path='/gallery' component={GalleryPage} />
+          <Route path='/gallery/:id' component={ShowGallery} />
+          
           <Route path='/clinic' component={Notfound} />
           <Route path='/services' component={Notfound} />
-          <Route path='/specialist' component={Notfound} />
-          <Route path='/downloads' component={Downloads} />
           <Route path='/project' component={Notfound} />
-          <Route path='/contactus' component={Notfound} />
         </div>
       </Router>
       {/* <Home /> */}

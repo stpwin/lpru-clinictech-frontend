@@ -1,33 +1,48 @@
 import React, { Component } from 'react'
 import { Table, Container, Button } from 'react-bootstrap'
-import {FaDownload} from 'react-icons/fa'
+import { FaDownload } from 'react-icons/fa'
+
+import downloadData from "./downloads.json"
 
 export class Downloads extends Component {
   render() {
     return (
       <Container>
-        <DownloadGroup title='หัวข้อกลุ่มดาวน์โหลด 1' />
-        <DownloadGroup title='หัวข้อกลุ่มดาวน์โหลด 2' />
-        <DownloadGroup title='หัวข้อกลุ่มดาวน์โหลด 3' />
-        <DownloadGroup title='หัวข้อกลุ่มดาวน์โหลด 4' />
+        {downloadData && downloadData.map((item, i) => {
+          return <DownloadGroup key={`download-group-${i}`} data={item} />;
+        })}
       </Container>
     );
   }
 }
 
-const DownloadButton = ({ }) => <Button className="btn-xs" variant="success"><FaDownload /></Button>
+const gotoDownload = (url) => {
+  // console.log(url)
+  window.open(url, "_blank");
+  // window.location.assign(url);
+};
 
-const FileItem = ({ index, fileName }) => (
+const DownloadButton = ({ url }) => (
+  <Button
+    className='btn-xs'
+    variant='success'
+    onClick={() => gotoDownload(url)}
+  >
+    <FaDownload />
+  </Button>
+);
+
+const FileItem = ({ index, fileName, url }) => (
   <tr>
     <td>{index}</td>
     <td>{fileName}</td>
     <td>
-      <DownloadButton />
+      <DownloadButton url={url} />
     </td>
   </tr>
 );
 
-const DownloadGroup = ({title }) => {
+const DownloadGroup = ({ data: { title, files } }) => {
   return (
     <>
       <h5 className='mt-5'>{title}</h5>
@@ -40,9 +55,15 @@ const DownloadGroup = ({title }) => {
           </tr>
         </thead>
         <tbody>
-            <FileItem index='1' fileName='file-1.pdf' />
-            <FileItem index='2' fileName='access.log' />
-            <FileItem index='3' fileName='report.xlsx' />
+          {files && files.length > 0 ? (
+            files.map((file, i) => {
+              return <FileItem key={`file-${i}`} index={i + 1} fileName={file.name} url={file.url} />;
+            })
+          ) : (
+            <tr>
+              <td colSpan={3} className="text-center">ไม่มีไฟล์</td>
+            </tr>
+          )}
         </tbody>
       </Table>
     </>

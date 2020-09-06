@@ -35,9 +35,9 @@ export default class Navigation extends Component {
             <NavLink  to='/project'>
               โครงการ
             </NavLink>
-            <NavLink  to='/contactus'>
+            {/* <NavLink  to='/contactus'>
               ติดต่อเรา
-            </NavLink>
+            </NavLink> */}
 
             {/* <LinkContainer to='/signup'>
               <NavItem>Signup</NavItem>

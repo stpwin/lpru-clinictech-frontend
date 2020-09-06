@@ -4,13 +4,18 @@ import React, { Component } from 'react'
 import { Scrollbars } from "react-custom-scrollbars";
 import {Container} from 'react-bootstrap'
 import CardItem from './CardItem';
+import { Link } from 'react-router-dom';
 
 export class News extends Component {
   render() {
     return (
       <div>
-        <h1 className='text-center mt-5'>ข่าวประชาสัมพันธ์</h1>
         <Container>
+          <h1 className='text-center mt-5'>ข่าวประชาสัมพันธ์</h1>
+          <div className='float-right'>
+            <Link to="/News">แสดงทั้งหมด</Link>
+          </div>
+          <br></br>
           <Scrollbars autoHeight autoHeightMin={350} autoHeightMax={350}>
             <div className='card-slide'>
               <NewsItem />

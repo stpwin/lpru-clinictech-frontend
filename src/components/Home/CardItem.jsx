@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Button } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 export class CardItem extends Component {
   render() {
@@ -12,9 +13,12 @@ export class CardItem extends Component {
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
           </Card.Text>
-          <Button className='btn-xs' variant='primary'>
-            อ่านต่อ
-          </Button>
+          <LinkContainer to='/News/135'>
+            <Button className='btn-xs' variant='primary'>
+              อ่านต่อ
+            </Button>
+          </LinkContainer>
+
           <Card.Text>
             <small className='text-muted'>Last updated 3 mins ago</small>
           </Card.Text>
