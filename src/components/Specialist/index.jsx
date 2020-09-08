@@ -46,10 +46,10 @@ const MediaItem = ({ data: { title, image, description, owner } }) => {
           />
         ) : (
           <img
-            width={64}
-            height={64}
+            width={96}
+            height={96}
             className='mr-3'
-            src='holder.js/64x64?text=no image'
+            src='holder.js/96x96?text=no image'
             alt='Generic placeholder'
           />
         )}
@@ -75,6 +75,7 @@ const MediaItem = ({ data: { title, image, description, owner } }) => {
           </div>
         </Media.Body>
       </Media>
+      <hr />
     </>
   );
 };
