@@ -13,11 +13,11 @@ export class Activities extends Component {
       <Container>
         <h1 className='text-center mt-5'>ภาพกิจกรรม</h1>
         <div className='float-right'>
-          <Link to='/Gallery'>แสดงทั้งหมด</Link>
+          <Link to='/gallery'>แสดงทั้งหมด</Link>
         </div>
         <Scrollbars autoHeight autoHeightMin={40} autoHeightMax={450}>
           <div className='card-slide'>
-            <GalleryList />
+            <GalleryList  />
           </div>
         </Scrollbars>
       </Container>

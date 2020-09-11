@@ -7,10 +7,10 @@ export class GalleryPage extends Component {
   render() {
     return (
       <Container className='mt-5'>
-        <h1 className='text-center'>Gallery</h1>
+        <h1 className='text-center'>ภาพกิจกรรม</h1>
         <hr />
-        <div className='d-inline-flex flex-wrap justify-content-center'>
-          <GalleryList />
+        <div className='card-list' >
+          <GalleryList className="mt-5" />
         </div>
       </Container>
     );

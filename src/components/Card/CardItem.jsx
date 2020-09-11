@@ -79,7 +79,7 @@ const GalleryItem = (props) => (
 );
 
 const NewsItem = (props) => {
-  return <CardItem {...props} />;
+  return <CardItem  {...props} />;
 };
 
 export default CardItem

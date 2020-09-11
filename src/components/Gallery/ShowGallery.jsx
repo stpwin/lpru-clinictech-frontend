@@ -4,7 +4,7 @@ import Holder from "holderjs"
 
 import { Lightbox } from "react-modal-image";
 
-import imagesData from "../../gallery-1.json"
+import imagesData from "../../mock/gallery-1.json"
 
 export class ShowGallery extends Component {
   state = {

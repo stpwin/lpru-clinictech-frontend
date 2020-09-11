@@ -1,18 +1,39 @@
 import React, { Component } from 'react'
 import { Table, Container, Button } from 'react-bootstrap'
 import { FaDownload } from 'react-icons/fa'
+import Fetching from "../Fetching";
+import EmptyItem from "../Card/EmptyItem";
+import { getDownloadList } from "../../api";
 
-import downloadData from "./downloads.json"
+// import downloadData from "./downloads.json"
 
 export class Downloads extends Component {
+  state = {
+    downloads: [],
+    done: false
+  }
+  componentDidMount() {
+    getDownloadList().then(downloads => {
+      this.setState({
+        done: true,
+        downloads
+      })
+    });
+  }
   render() {
-    return (
-      <Container>
-        {downloadData && downloadData.map((item, i) => {
-          return <DownloadGroup key={`download-group-${i}`} data={item} />;
-        })}
-      </Container>
-    );
+    const { done, downloads } = this.state;
+    if (done) {
+      if (downloads.length === 0) return <EmptyItem />;
+      return (
+        <Container>
+          {downloads &&
+            downloads.map((item, i) => {
+              return <DownloadGroup key={`download-group-${i}`} data={item} />;
+            })}
+        </Container>
+      );
+    }
+    return <Fetching />;
   }
 }
 

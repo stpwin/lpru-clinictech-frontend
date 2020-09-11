@@ -15,15 +15,15 @@ import ShowNews from "./components/News/ShowNews"
 import Specialist from "./components/Specialist";
 import {GalleryPage, ShowGallery} from "./components/Gallery";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
     <div className='App'>
       <Banner />
       <Router>
-        <Navigation />
-        <div>
+          <Navigation />
+        <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/about' component={About} />
           <Route path='/specialist' component={Specialist} />
@@ -36,7 +36,9 @@ function App() {
           <Route path='/clinic' component={UnderConstruction} />
           <Route path='/services' component={UnderConstruction} />
           <Route path='/project' component={UnderConstruction} />
-        </div>
+
+          <Route component={Notfound} />
+        </Switch>
       </Router>
       {/* <Home /> */}
       <Footer></Footer>

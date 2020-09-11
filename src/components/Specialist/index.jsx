@@ -2,23 +2,42 @@ import React, { Component } from 'react'
 import { Container, Media } from "react-bootstrap";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
 import Holder from 'holderjs'
+import Fetching from "../Fetching";
+import EmptyItem from "../Card/EmptyItem";
 
-import data from './data.json'
+import { getSpecialist } from "../../api";
 
 export class Specialist extends Component {
+  state = {
+    specialist: [],
+    done: false
+  }
   componentDidMount() {
-    Holder.run({});
+    getSpecialist().then(specialist => {
+      this.setState({
+        done: true,
+        specialist
+      }, () => {
+          Holder.run({});
+      });
+    });
+    
   }
   render() {
-    return (
-      <div>
-        <Container className='my-5'>
-          <h4>รายการ</h4>
-          <hr />
-          <MediaList data={data} />
-        </Container>
-      </div>
-    );
+    const { done, specialist } = this.state;
+    if (done) {
+      if (specialist.length === 0) return <EmptyItem />;
+      return (
+        <div>
+          <Container className='my-5'>
+            <h4>รายการ</h4>
+            <hr />
+            <MediaList data={specialist} />
+          </Container>
+        </div>
+      );
+    }
+    return <Fetching />;
   }
 }
 

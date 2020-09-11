@@ -6,8 +6,11 @@ export class News extends Component {
   render() {
     return (
       <Container className='mt-5'>
-        <h1 className='text-center'>News</h1>
-        <NewsList />
+        <h1 className='text-center'>ข่าวประชาสัมพันธ์</h1>
+        <hr />
+        <div class='card-list'>
+          <NewsList className="card-item"/>
+        </div>
       </Container>
     );
   }

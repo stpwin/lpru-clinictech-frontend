@@ -14,7 +14,7 @@ export class News extends Component {
         <Container>
           <h1 className='text-center mt-5'>ข่าวประชาสัมพันธ์</h1>
           <div className='float-right'>
-            <Link to='/News'>แสดงทั้งหมด</Link>
+            <Link to='/news'>แสดงทั้งหมด</Link>
           </div>
           <br></br>
           <Scrollbars autoHeight autoHeightMin={400} autoHeightMax={450}>
