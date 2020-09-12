@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import Holder from "holderjs";
 import Moment from "react-moment";
 import "moment-timezone";
 
@@ -24,9 +23,6 @@ import "moment-timezone";
 // Moment.globalElement = 'span';
 
 export class CardItem extends Component {
-  componentDidMount() {
-    Holder.run({});
-  }
   render() {
     const {
       title,
@@ -41,7 +37,7 @@ export class CardItem extends Component {
         {thumdbImg ? (
           <Card.Img variant='top' src={thumdbImg} />
         ) : (
-          <Card.Img variant='top' src='holder.js/100px150' />
+          <Card.Img variant='top' src='https://via.placeholder.com/450' />
         )}
         <Card.Body>
           <Card.Title>{title}</Card.Title>
@@ -59,9 +55,6 @@ export class CardItem extends Component {
           ) : null}
 
           {created ? (
-            // <Card.Text className='text-muted mt-1'>
-            //   <Moment fromNow>{created}</Moment>
-            // </Card.Text>
             <footer className='blockquote-footer'>
               <small className='text-muted'>
                 <Moment fromNow>{created}</Moment>

@@ -8,7 +8,6 @@
     "@testing-library/user-event": "^7.1.2",
     "bootstrap": "^4.5.2",
     "elliptic": "6.5.3",
-    "holderjs": "^2.9.7",
     "json-loader": "^0.5.7",
     "moment": "^2.27.0",
     "moment-timezone": "^0.5.31",
@@ -22,10 +21,17 @@
     "react-icons": "^3.10.0",
     "react-modal-image": "^2.5.0",
     "react-moment": "^0.9.7",
+    "react-redux": "^7.2.1",
     "react-router": "^5.2.0",
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-router-redux": "^4.0.8",
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
+    "redux-cache": "^0.3.0",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

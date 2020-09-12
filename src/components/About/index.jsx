@@ -1,14 +1,9 @@
 import React, { Component } from 'react'
-
 import { Accordion, Card, Button, Container} from "react-bootstrap";
 import Personnel from './Personnel';
 
-import Holder from "holderjs";
-
 export class About extends Component {
-  componentDidMount() {
-    Holder.run({});
-  }
+
   render() {
     return (
       <Container className="mt-5">

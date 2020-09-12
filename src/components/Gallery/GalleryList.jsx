@@ -2,28 +2,23 @@ import React, { Component } from 'react'
 import { GalleryItem } from "../Card/CardItem";
 import Fetching from "../Fetching";
 import EmptyItem from "../Card/EmptyItem";
-import { getGalleryList } from "../../api";
+import { connect } from "react-redux";
+import { galleryAction } from "../../actions";
 
 export class GalleryList extends Component {
-  state = {
-    gallery: [],
-    done: false
-  }
+
   componentDidMount() {
-    getGalleryList().then(gallery => {
-      this.setState({
-        done: true,
-        gallery
-      })
-    });
+    this.props.fetchAllGallery();
   }
   render() {
-    const { done, gallery } = this.state;
-    if (done) {
-      if (gallery.length === 0) return <EmptyItem />;
+    const { fetching, data, error } = this.props;
+    if (fetching) return <Fetching />;
+    if (error) return <h1>Error</h1>;
+    if (data) {
+      if (data.length === 0) return <EmptyItem />;
       return (
-        gallery &&
-        gallery.map((item, i) => {
+        data &&
+        data.map((item, i) => {
           return (
             <GalleryItem
               className='p-3 card-item'
@@ -38,4 +33,19 @@ export class GalleryList extends Component {
   }
 }
 
-export default GalleryList
+const mapStateToProps = (state) => {
+  const { fetching, data, error } = state.gallery;
+  return {
+    fetching,
+    data,
+    error,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAllGallery: () => dispatch(galleryAction.fetchAll()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GalleryList);

@@ -3,7 +3,7 @@ import {
   handleFetchError,
 } from "./helpers";
 
-import { apiServer} from "./config"
+import { apiServer } from "./config"
 
 export function getNewsList() {
   const requestOptions = {

@@ -1,52 +1,35 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
+import { specialistAction } from "../../actions";
 import { Container, Media } from "react-bootstrap";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
-import Holder from 'holderjs'
 import Fetching from "../Fetching";
 import EmptyItem from "../Card/EmptyItem";
 import FailItem from "../Card/FailItem";
 
-import { getSpecialist } from "../../api";
-
 export class Specialist extends Component {
-  state = {
-    specialist: [],
-    done: false,
-    fail: false
-  }
   componentDidMount() {
-    getSpecialist()
-      .then((specialist) => {
-        this.setState(
-          {
-            done: true,
-            specialist,
-          },
-          () => {
-            Holder.run({});
-          }
-        );
-      })
-      .catch((err) => {
-        this.setState({
-          fail: true,
-        });
-      });
-    
+    this.props.fetchAll();
   }
   render() {
-    const { done, fail, specialist } = this.state;
+    const { fetching, data, error } = this.props;
     return (
-      <Container className="mt-5">
-        <SpecialistWrapper done={done} fail={fail} specialist={specialist} />
+      <Container className='mt-5'>
+        {error ? (
+          <FailItem />
+        ) : fetching ? (
+          <Fetching />
+        ) : data ? (
+          <SpecialistWrapper specialist={data} />
+        ) : (
+          <h1>No data to display</h1>
+        )}
       </Container>
     );
   }
 }
 
-const SpecialistWrapper = ({ done, fail, specialist }) => {
-  if (fail) return <FailItem />;
-  if (done) {
+const SpecialistWrapper = ({ specialist }) => {
     if (specialist.length === 0) return <EmptyItem />;
     return (
       <>
@@ -55,8 +38,6 @@ const SpecialistWrapper = ({ done, fail, specialist }) => {
           <MediaList data={specialist} />
       </>
     );
-  }
-  return <Fetching />;
 };
 
 const MediaList = ({ data }) => {
@@ -79,28 +60,28 @@ const MediaItem = ({ data: { title, image, description, owner } }) => {
             height={64}
             className='mr-3'
             src={image}
-            alt='Generic placeholder'
+            alt='placeholder'
           />
         ) : (
           <img
             width={96}
             height={96}
             className='mr-3'
-            src='holder.js/96x96?text=no image'
-            alt='Generic placeholder'
+            src='https://via.placeholder.com/150?text=no image'
+            alt='placeholder'
           />
         )}
         <Media.Body>
           <h5>{title}</h5>
-            <p className='mb-0'>รายละเอียดเทคโนโลยีที่ให้บริการ</p>
-            {description &&
-              description.map((item, i) => {
-                return (
-                  <p key={`desc=${i}`} className='mb-0 ml-2 font-weight-light'>
-                    - {item}
-                  </p>
-                );
-              })}
+          <p className='mb-0'>รายละเอียดเทคโนโลยีที่ให้บริการ</p>
+          {description &&
+            description.map((item, i) => {
+              return (
+                <p key={`desc=${i}`} className='mb-0 ml-2 font-weight-light'>
+                  - {item}
+                </p>
+              );
+            })}
           <p className='mb-0 mt-2'>เจ้าของเทคโนโลยี</p>
           <div className='owner'>
             <div className='d-inline-flex flex-wrap'>
@@ -127,15 +108,15 @@ const Owner = ({ data: { image, name, phone, email, place } }) => {
             height={64}
             className='mr-3'
             src={image}
-            alt='Generic placeholder'
+            alt='placeholder'
           />
         ) : (
           <img
             width={64}
             height={64}
             className='mr-3'
-            src='holder.js/64x64?text=no image'
-            alt='Generic placeholder'
+            src='https://via.placeholder.com/150?text=no image'
+            alt='placeholder'
           />
         )}
         <Media.Body>
@@ -165,4 +146,19 @@ const Owner = ({ data: { image, name, phone, email, place } }) => {
   );
 }
 
-export default Specialist
+const mapStateToProps = (state) => {
+  const { fetching, data, error } = state.specialist;
+  return {
+    fetching,
+    data,
+    error,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAll: () => dispatch(specialistAction.fetchAll()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Specialist);

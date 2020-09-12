@@ -4,35 +4,34 @@ import { FaDownload } from 'react-icons/fa'
 import Fetching from "../Fetching";
 import EmptyItem from "../Card/EmptyItem";
 import FailItem from "../Card/FailItem";
-import { getDownloadList } from "../../api";
+import { connect } from "react-redux";
+import { downloadsAction } from "../../actions";
 
 export class Downloads extends Component {
-  state = {
-    downloads: [],
-    done: false,
-    fail: false
-  }
+
   componentDidMount() {
-    getDownloadList().then(downloads => {
-      this.setState({
-        done: true,
-        downloads
-      })
-    }).catch(err => {
-      this.setState({
-        fail: true
-      })
-    });
+    this.props.fetchAllDownloads();
   }
   render() {
-    const { done, fail, downloads } = this.state;
-    return <Container className="mt-5"><DownloadList done={done} fail={fail} downloads={downloads} /></Container>
+    const { fetching, data, error } = this.props;
+    return (
+      <Container className='mt-5'>
+        {error ? (
+          <FailItem />
+        ) : fetching ? (
+          <Fetching />
+        ) : data ? (
+          <DownloadList downloads={data} />
+        ) : (
+          <h1>No data to display</h1>
+        )}
+      </Container>
+    );
   }
 }
 
-const DownloadList = ({ done, fail, downloads }) => {
-  if (fail) return <FailItem />;
-  if (done) {
+const DownloadList = ({ downloads }) => {
+
     if (downloads.length === 0) return <EmptyItem />;
     return (
         <>
@@ -40,10 +39,9 @@ const DownloadList = ({ done, fail, downloads }) => {
           downloads.map((item, i) => {
             return <DownloadGroup key={`download-group-${i}`} data={item} />;
           })}
-  </>
+        </>
       );
-    }
-    return <Fetching />;
+
 }
 
 const gotoDownload = (url) => {
@@ -100,4 +98,19 @@ const DownloadGroup = ({ data: { title, files } }) => {
   );
 }
 
-export default Downloads
+const mapStateToProps = (state) => {
+  const { fetching, data, error } = state.downloads;
+  return {
+    fetching,
+    data,
+    error,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAllDownloads: () => dispatch(downloadsAction.fetchAll()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Downloads);

@@ -47,7 +47,10 @@ const PersonnelItem = ({ data: { name, image, clinicPosition, position, contact 
       {image ? (
         <Card.Img variant='top' src={image} />
       ) : (
-        <Card.Img variant='top' src='holder.js/100px160?text=no image' />
+        <Card.Img
+          variant='top'
+          src='https://via.placeholder.com/160?text=no image'
+        />
       )}
 
       <Card.Body>

@@ -3,7 +3,8 @@ import { NewsItem } from "../Card/CardItem";
 import Fetching from "../Fetching"
 import EmptyItem from "../Card/EmptyItem"
 
-import { getNewsList } from "../../api";
+import { connect } from "react-redux";
+import { newsAction } from "../../actions";
 
 export class NewsList extends Component {
   state = {
@@ -12,28 +13,42 @@ export class NewsList extends Component {
   }
 
   componentDidMount() {
-    getNewsList().then(news => {
-      this.setState({
-        done: true,
-        news
-      })
-    });
+    this.props.fetchAllNews();
   }
 
   render() {
-    const { done, news } = this.state;
-    if (done) {
-      if (news.length === 0) return <EmptyItem />
-        return (
-          news &&
-          news.map((item, i) => {
-            return <NewsItem key={`news-${i}`} {...item} />;
-          })
-        );
+    const { fetching, data, error } = this.props
+
+    if (fetching) return <Fetching />;
+    if (error) return <h1>Error</h1>;
+    if (data) {
+      if (data.length === 0) return <EmptyItem />;
+      return (
+        data &&
+        data.map((item, i) => {
+          return <NewsItem key={`news-${i}`} {...item} />;
+        })
+      );
     } 
-    return <Fetching />
+    return <h1>No data to display</h1>;
     
   }
 }
 
-export default NewsList
+const mapStateToProps = (state) => {
+  const { fetching, data, error } = state.news;
+  return {
+    fetching,
+    data,
+    error,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAllNews: () =>
+      dispatch(newsAction.fetchAll()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewsList);

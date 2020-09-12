@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-// import "holderjs";
 
 import Navigation from './components/Navbar'
 import Banner from './components/Banner'
@@ -40,8 +39,7 @@ function App() {
           <Route component={Notfound} />
         </Switch>
       </Router>
-      {/* <Home /> */}
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 }
