@@ -10,7 +10,6 @@ import NewsList from '../News/NewsList';
 export class News extends Component {
   render() {
     return (
-      <div>
         <Container>
           <h1 className='text-center mt-5'>ข่าวประชาสัมพันธ์</h1>
           <div className='float-right'>
@@ -23,7 +22,6 @@ export class News extends Component {
             </div>
           </Scrollbars>
         </Container>
-      </div>
     );
   }
 }

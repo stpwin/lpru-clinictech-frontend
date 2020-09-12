@@ -3,14 +3,14 @@ import { Table, Container, Button } from 'react-bootstrap'
 import { FaDownload } from 'react-icons/fa'
 import Fetching from "../Fetching";
 import EmptyItem from "../Card/EmptyItem";
+import FailItem from "../Card/FailItem";
 import { getDownloadList } from "../../api";
-
-// import downloadData from "./downloads.json"
 
 export class Downloads extends Component {
   state = {
     downloads: [],
-    done: false
+    done: false,
+    fail: false
   }
   componentDidMount() {
     getDownloadList().then(downloads => {
@@ -18,23 +18,32 @@ export class Downloads extends Component {
         done: true,
         downloads
       })
+    }).catch(err => {
+      this.setState({
+        fail: true
+      })
     });
   }
   render() {
-    const { done, downloads } = this.state;
-    if (done) {
-      if (downloads.length === 0) return <EmptyItem />;
-      return (
-        <Container>
-          {downloads &&
-            downloads.map((item, i) => {
-              return <DownloadGroup key={`download-group-${i}`} data={item} />;
-            })}
-        </Container>
+    const { done, fail, downloads } = this.state;
+    return <Container className="mt-5"><DownloadList done={done} fail={fail} downloads={downloads} /></Container>
+  }
+}
+
+const DownloadList = ({ done, fail, downloads }) => {
+  if (fail) return <FailItem />;
+  if (done) {
+    if (downloads.length === 0) return <EmptyItem />;
+    return (
+        <>
+        {downloads &&
+          downloads.map((item, i) => {
+            return <DownloadGroup key={`download-group-${i}`} data={item} />;
+          })}
+  </>
       );
     }
     return <Fetching />;
-  }
 }
 
 const gotoDownload = (url) => {

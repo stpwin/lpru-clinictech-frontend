@@ -4,42 +4,60 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
 import Holder from 'holderjs'
 import Fetching from "../Fetching";
 import EmptyItem from "../Card/EmptyItem";
+import FailItem from "../Card/FailItem";
 
 import { getSpecialist } from "../../api";
 
 export class Specialist extends Component {
   state = {
     specialist: [],
-    done: false
+    done: false,
+    fail: false
   }
   componentDidMount() {
-    getSpecialist().then(specialist => {
-      this.setState({
-        done: true,
-        specialist
-      }, () => {
-          Holder.run({});
+    getSpecialist()
+      .then((specialist) => {
+        this.setState(
+          {
+            done: true,
+            specialist,
+          },
+          () => {
+            Holder.run({});
+          }
+        );
+      })
+      .catch((err) => {
+        this.setState({
+          fail: true,
+        });
       });
-    });
     
   }
   render() {
-    const { done, specialist } = this.state;
-    if (done) {
-      if (specialist.length === 0) return <EmptyItem />;
-      return (
-        <div>
-          <Container className='my-5'>
-            <h4>รายการ</h4>
-            <hr />
-            <MediaList data={specialist} />
-          </Container>
-        </div>
-      );
-    }
-    return <Fetching />;
+    const { done, fail, specialist } = this.state;
+    return (
+      <Container className="mt-5">
+        <SpecialistWrapper done={done} fail={fail} specialist={specialist} />
+      </Container>
+    );
   }
 }
+
+const SpecialistWrapper = ({ done, fail, specialist }) => {
+  if (fail) return <FailItem />;
+  if (done) {
+    if (specialist.length === 0) return <EmptyItem />;
+    return (
+      <>
+          <h4>รายการ</h4>
+          <hr />
+          <MediaList data={specialist} />
+      </>
+    );
+  }
+  return <Fetching />;
+};
 
 const MediaList = ({ data }) => {
   return (

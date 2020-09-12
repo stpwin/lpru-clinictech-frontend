@@ -8,7 +8,7 @@ export class News extends Component {
       <Container className='mt-5'>
         <h1 className='text-center'>ข่าวประชาสัมพันธ์</h1>
         <hr />
-        <div class='card-list'>
+        <div className='card-list'>
           <NewsList className="card-item"/>
         </div>
       </Container>

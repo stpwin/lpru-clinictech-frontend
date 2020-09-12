@@ -61,7 +61,7 @@ export class About extends Component {
   }
 }
 
-const Provenance = ({ }) => {
+const Provenance = () => {
   return (
     <>
       <p>
@@ -106,7 +106,7 @@ const Provenance = ({ }) => {
   );
 }
 
-const Purpose = ({ }) => {
+const Purpose = () => {
   return (
     <>
       <p>
@@ -122,7 +122,7 @@ const Purpose = ({ }) => {
   );
 }
 
-const Connection = ({ }) => {
+const Connection = () => {
   return <>
     ชุมชน กลุ่มเกษตรกร กลุ่มหมู่บ้าน กลุ่มวิสาหกิจชมุชน กลุ่มโอทอป (OTOP) โรงเรียน และประชาชนทั่วไป ตลอดจนกลุ่มนักเรียน นักศึกษา หน่วยงานราชการ องค์การบริหารส่วนตำบลต่าง ๆ ในเขตจังหวัดลำปางและจังหวัดใกล้เคียง จำนวน 200 คน
   </>

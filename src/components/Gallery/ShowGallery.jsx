@@ -51,6 +51,7 @@ export class ShowGallery extends Component {
         <img
           ref={this.preRenderRef}
           className='pre-render'
+          alt="temporary"
           src={this.state.currentImage}
           style={{ display: "none" }}
         />
