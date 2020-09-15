@@ -1,0 +1,5 @@
+export const askConstants = {
+  SEND_REQUEST: "ASK_SEND_REQUEST",
+  SEND_SUCCESS: "ASK_SEND_SUCCESS",
+  SEND_FAIL: "ASK_SEND_FAIL",
+};
