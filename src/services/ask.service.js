@@ -10,7 +10,7 @@ const sendAsk = (name, email, body) => {
     body: JSON.stringify({ name, email, body }),
   };
 
-  return fetch(`${apiServer}/sendAsk`, requestOptions)
+  return fetch(`${apiServer}/ask/send.php`, requestOptions)
     .then(handleResponse)
     .then((res) => {
       return res;

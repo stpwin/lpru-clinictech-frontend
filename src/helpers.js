@@ -3,6 +3,12 @@ export const handleResponse = (response) => {
     return null;
   }
 
+  const contentType = response.headers.get("content-type");
+  if (contentType && contentType.indexOf("application/json") === -1) {
+    console.warn("Response is not JSON format!");
+    return null;
+  } 
+
   return response.text().then((text) => {
     let error;
     let data = {};
@@ -10,7 +16,11 @@ export const handleResponse = (response) => {
       try {
         data = JSON.parse(text);
         error = data.error;
-      } catch {}
+      } catch {
+        console.warn("Parse JSON fail!");
+        data = null;
+        error = '{"error":"Parse JSON fail!"}';
+      }
     }
     if (!response.ok) {
       // console.log(error)
@@ -22,6 +32,15 @@ export const handleResponse = (response) => {
     }
     return data;
   });
+};
+
+export const handleNotfound = (e) => {
+  if (e instanceof TypeError) {
+    return Promise.resolve("Not found");
+  }
+  console.log("Fetch not found:", e);
+  // throw e;
+  return null
 };
 
 export const handleFetchError = (e) => {

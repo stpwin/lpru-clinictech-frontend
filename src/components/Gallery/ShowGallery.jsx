@@ -64,7 +64,7 @@ export class ShowGallery extends Component {
               </div>
             </>
           ) : (
-            <h1>No data to display</h1>
+            <h5 className="text-center">Not found</h5>
           )}
         </Container>
         <img

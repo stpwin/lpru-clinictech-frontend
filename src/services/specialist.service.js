@@ -1,16 +1,20 @@
-import { handleResponse, handleFetchError } from "../helpers";
+import { handleResponse, handleFetchError, handleNotfound } from "../helpers";
 import { apiServer } from "../config";
 
 const fetchAll = () => {
   const requestOptions = {
     method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
   };
 
-  return fetch(`${apiServer}/getSpecialist`, requestOptions)
+  return fetch(`${apiServer}/specialist/all.php`, requestOptions)
     .then(handleResponse)
     .then((res) => {
       return res;
     })
+    .catch(handleNotfound)
     .catch(handleFetchError);
 };
 

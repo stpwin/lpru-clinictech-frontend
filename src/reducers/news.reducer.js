@@ -7,12 +7,12 @@ export const news = (state = {}, action) => {
       return { fetching: true };
     case newsConstants.FETCH_ALL_SUCCESS:
       return {
-        etching: false,
+        fetching: false,
         [DEFAULT_KEY]: generateCacheTTL(),
         data: action.data,
       };
     case newsConstants.FETCH_ALL_FAIL:
-      return { etching: false, error: action.error };
+      return { fetching: false, error: action.error };
     default:
       return state;
   }

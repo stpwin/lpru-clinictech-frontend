@@ -29,7 +29,7 @@ export class GalleryList extends Component {
         })
       );
     }
-    return <Fetching />;
+    return <EmptyItem />;
   }
 }
 

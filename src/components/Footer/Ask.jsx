@@ -55,11 +55,11 @@ export class Ask extends Component {
             />
           </Form.Group>
 
-          <Form.Group controlId='exampleForm.ControlTextarea1'>
+          {/* <Form.Group controlId='exampleForm.ControlTextarea1'>
             <Form.Text className='text-danger'>
               We'll never share your email with anyone else.
             </Form.Text>
-          </Form.Group>
+          </Form.Group> */}
 
           {error ? (
             <Button variant='primary' size='sm' onClick={this.handleSubmit}>

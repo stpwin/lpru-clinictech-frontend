@@ -30,7 +30,7 @@ export class NewsList extends Component {
         })
       );
     } 
-    return <h1>No data to display</h1>;
+    return <EmptyItem />;
     
   }
 }

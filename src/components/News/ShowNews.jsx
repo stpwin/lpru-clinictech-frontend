@@ -39,7 +39,7 @@ export class ShowNews extends Component {
             <NewsContent data={data} />
           </>
         ) : (
-          <h1>No data to display</h1>
+          <h5 className="text-center">Not found</h5>
         )}
       </Container>
     );

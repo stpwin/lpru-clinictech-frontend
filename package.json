@@ -34,6 +34,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
+    "prebuild": "./prebuild.bat",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "postbuild": "./postbuild.bat",
