@@ -23,7 +23,7 @@ export class Downloads extends Component {
         ) : data ? (
           <DownloadList downloads={data} />
         ) : (
-          <h5 className="text-center">Not found</h5>
+          <h5 className='text-center'>ไม่มีข้อมูล</h5>
         )}
       </Container>
     );

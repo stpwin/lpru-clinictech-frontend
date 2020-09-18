@@ -22,7 +22,7 @@ export class Specialist extends Component {
         ) : data ? (
           <SpecialistWrapper specialist={data} />
         ) : (
-          <h5 className="text-center">Not found</h5>
+          <h5 className="text-center">ไม่มีข้อมูล</h5>
         )}
       </Container>
     );
