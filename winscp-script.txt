@@ -1,3 +1,3 @@
 open clinictech@www.scilpru.in.th
-synchronize remote "build" "/" -delete
+synchronize remote "build" "/" -delete -filemask=*/|api/
 exit
