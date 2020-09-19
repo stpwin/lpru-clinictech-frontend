@@ -4,6 +4,7 @@ import Fetching from "../Fetching";
 import EmptyItem from "../Card/EmptyItem";
 import { connect } from "react-redux";
 import { galleryAction } from "../../actions";
+import { genGalleryLink } from "../../utils";
 
 export class GalleryList extends Component {
 
@@ -19,11 +20,12 @@ export class GalleryList extends Component {
       return (
         data &&
         data.map((item, i) => {
+          const dataWithLink = { ...item, linkTo: genGalleryLink (item.id)};
           return (
             <GalleryItem
               className='p-3 card-item'
               key={`gallery-${i}`}
-              {...item}
+              {...dataWithLink}
             />
           );
         })

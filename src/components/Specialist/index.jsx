@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from "react-redux";
 import { specialistAction } from "../../actions";
 import { Container, Media } from "react-bootstrap";
-import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaUser } from 'react-icons/fa'
 import Fetching from "../Fetching";
 import EmptyItem from "../Card/EmptyItem";
 import FailItem from "../Card/FailItem";
@@ -50,16 +50,16 @@ const MediaList = ({ data }) => {
   );
 }
 
-const MediaItem = ({ data: { title, image, description, owner } }) => {
+const MediaItem = ({ data: { title, thumbnail, describe, owner } }) => {
   return (
     <>
       <Media as='li' className='mb-3'>
-        {image ? (
+        {thumbnail ? (
           <img
             width={64}
             height={64}
             className='mr-3'
-            src={image}
+            src={thumbnail}
             alt='placeholder'
           />
         ) : (
@@ -74,8 +74,8 @@ const MediaItem = ({ data: { title, image, description, owner } }) => {
         <Media.Body>
           <h5>{title}</h5>
           <p className='mb-0'>รายละเอียดเทคโนโลยีที่ให้บริการ</p>
-          {description &&
-            description.map((item, i) => {
+          {describe &&
+            describe.map((item, i) => {
               return (
                 <p key={`desc=${i}`} className='mb-0 ml-2 font-weight-light'>
                   - {item}
@@ -99,51 +99,56 @@ const MediaItem = ({ data: { title, image, description, owner } }) => {
 };
 
 const Owner = ({ data: { image, name, phone, email, place } }) => {
-  return (
-    <div className='p-2'>
-      <Media>
-        {image ? (
-          <img
-            width={64}
-            height={64}
-            className='mr-3'
-            src={image}
-            alt='placeholder'
-          />
-        ) : (
-          <img
-            width={64}
-            height={64}
-            className='mr-3'
-            src='https://via.placeholder.com/150?text=no image'
-            alt='placeholder'
-          />
-        )}
-        <Media.Body>
-          <h5 className='small'>{name}</h5>
-          <p className='mb-0 font-weight-light small'>
-            <FaPhone />{" "}
-            <a href={`tel:${phone}`} target='_blank' rel='noopener noreferrer'>
-              {phone}
-            </a>
-          </p>
-          <p className='mb-0 font-weight-light small'>
-            <FaEnvelope />{" "}
-            <a
-              href={`mailto:${email}`}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              {email}
-            </a>
-          </p>
-          <p className='mb-0 font-weight-light small'>
-            <FaMapMarkerAlt /> {place}
-          </p>
-        </Media.Body>
-      </Media>
-    </div>
-  );
+  if (!name) return <div className='p-2'>-</div>;
+    return (
+      <div className='p-2'>
+        <Media>
+          {image ? (
+            <img
+              width={64}
+              height={64}
+              className='mr-3'
+              src={image}
+              alt='placeholder'
+            />
+          ) : (
+            <img
+              width={64}
+              height={64}
+              className='mr-3'
+              src='https://via.placeholder.com/150?text=no image'
+              alt='placeholder'
+            />
+          )}
+          <Media.Body>
+            <FaUser /> <span className='small'>{name}</span>
+            <p className='mb-0 font-weight-light small'>
+              <FaPhone />{" "}
+              <a
+                href={`tel:${phone}`}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                {phone || "-"}
+              </a>
+            </p>
+            <p className='mb-0 font-weight-light small'>
+              <FaEnvelope />{" "}
+              <a
+                href={`mailto:${email}`}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                {email || "-"}
+              </a>
+            </p>
+            <p className='mb-0 font-weight-light small'>
+              <FaMapMarkerAlt /> {place || "-"}
+            </p>
+          </Media.Body>
+        </Media>
+      </div>
+    );
 }
 
 const mapStateToProps = (state) => {

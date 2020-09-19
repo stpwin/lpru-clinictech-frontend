@@ -5,7 +5,7 @@ const fetchAll = () => {
   const requestOptions = {
     method: "GET",
     headers: {
-      "Content-Type": "application/json",
+      Accept: "application/json",
     },
   };
 

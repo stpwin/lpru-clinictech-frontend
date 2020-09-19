@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { NewsItem } from "../Card/CardItem";
 import Fetching from "../Fetching"
 import EmptyItem from "../Card/EmptyItem"
+import { genNewsLink } from "../../utils";
 
 import { connect } from "react-redux";
 import { newsAction } from "../../actions";
@@ -26,7 +27,9 @@ export class NewsList extends Component {
       return (
         data &&
         data.map((item, i) => {
-          return <NewsItem key={`news-${i}`} {...item} />;
+          console.log(item)
+          const dataWithLink = { ...item, linkTo: genNewsLink(item.id) };
+          return <NewsItem key={`news-${i}`} {...dataWithLink} />;
         })
       );
     } 
