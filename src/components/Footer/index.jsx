@@ -1,30 +1,53 @@
 import React, { Component } from 'react'
 
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Spinner } from 'react-bootstrap'
 
 import Contact from './Contact'
 import Ask from './Ask'
 
+import { getWebContact } from "../../firebaseApp";
+
 export class Footer extends Component {
+  state = {
+    fetchDone: false,
+  }
+  componentDidMount() {
+    getWebContact().then(data => {
+      this.setState({
+        ...data,
+        fetchDone: true,
+      });
+    })
+  }
   render() {
+    const {
+      footerText,
+      fetchDone,
+      email,
+      facebook,
+      fax,
+      place,
+      tel,
+    } = this.state;
     return (
       <footer>
         <Container className='py-5'>
           <Row>
             <Col>
               <h5>คลินิกเทคโนโลยี มหาวิทยาลัยราชภัฏลำปาง</h5>
-              <p>
-                มหาวิทยาลัยราชภัฏลำปาง ได้จัดตั้ง "คลินิกเทคโนโลยี
-                มหาวิทยาลัยราชภัฏลำปาง" ขึ้น เพื่อให้คำปรึกษา เผยแพร่ข่าวสาร
-                ถ่ายทอด พัฒนาและปรับปรุง
-                เกี่ยวกับเทคโนโลยีด้านต่าง ๆ ที่มี
-                ให้กับชุมชนท้องถิ่นในจังหวัดลำปาง และพื้นที่ใกล้เคียง
-                ดังปรัชญาที่ว่า "มหาวิทยาลัยเพื่อการพัฒนาท้องถิ่น"
-              </p>
+              {fetchDone ? (
+                <p>{footerText}</p>
+              ) : (
+                <Spinner animation='border' variant='danger' />
+              )}
             </Col>
             <Col>
               <h5>ติดต่อ</h5>
-              <Contact />
+              {fetchDone ? (
+                <Contact email={email} facebook={facebook} fax={fax} place={place} tel={tel} />
+              ) : (
+                <Spinner animation='border' variant='danger' />
+              )}
             </Col>
             <Col>
               <h5>สอบถาม</h5>

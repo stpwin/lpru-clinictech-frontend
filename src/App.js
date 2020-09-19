@@ -17,6 +17,7 @@ import {GalleryPage, ShowGallery} from "./components/Gallery";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
+  
   return (
     <div className='App'>
       <Banner />
@@ -39,7 +40,7 @@ function App() {
           <Route component={Notfound} />
         </Switch>
       </Router>
-      <Footer />
+      <Footer/>
     </div>
   );
 }
