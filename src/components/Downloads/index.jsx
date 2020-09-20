@@ -50,11 +50,15 @@ const gotoDownload = (url) => {
   // window.location.assign(url);
 };
 
-const DownloadButton = ({ url }) => (
+const DownloadButton = ({ fileName, url }) => (
   <Button
+    as='a'
     className='btn-xs'
     variant='success'
-    onClick={() => gotoDownload(url)}
+    href={`${url}`}
+    download={`${fileName}`}
+    target="_blank"
+    // onClick={() => gotoDownload(url)}
   >
     <FaDownload />
   </Button>
@@ -65,7 +69,7 @@ const FileItem = ({ index, fileName, url }) => (
     <td>{index}</td>
     <td>{fileName}</td>
     <td>
-      <DownloadButton url={url} />
+      <DownloadButton fileName={fileName} url={url} />
     </td>
   </tr>
 );

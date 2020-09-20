@@ -5,7 +5,7 @@ const sendAsk = (name, email, body) => {
   const requestOptions = {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Accept": "application/json",
     },
     body: JSON.stringify({ name, email, body }),
   };
