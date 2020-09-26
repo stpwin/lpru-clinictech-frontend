@@ -44,12 +44,6 @@ const DownloadList = ({ downloads }) => {
 
 }
 
-const gotoDownload = (url) => {
-  // console.log(url)
-  window.open(url, "_blank");
-  // window.location.assign(url);
-};
-
 const DownloadButton = ({ fileName, url }) => (
   <Button
     as='a'
