@@ -6,6 +6,7 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaUser } from 'react-icons/fa'
 import Fetching from "../Fetching";
 import EmptyItem from "../Card/EmptyItem";
 import FailItem from "../Card/FailItem";
+import { getSpecialistImage } from "../../helpers";
 
 export class Specialist extends Component {
   componentDidMount() {
@@ -50,32 +51,32 @@ const MediaList = ({ data }) => {
   );
 }
 
-const MediaItem = ({ data: { title, thumbnail, describe, owner } }) => {
+const MediaItem = ({ data: { title, thumbnail, descriptions, owner } }) => {
   return (
     <>
       <Media as='li' className='mb-3'>
         {thumbnail ? (
           <img
-            width={64}
-            height={64}
+            width={120}
+            height={90}
             className='mr-3'
-            src={thumbnail}
+            src={getSpecialistImage(thumbnail)}
             alt='placeholder'
           />
         ) : (
           <img
-            width={96}
-            height={96}
+            width={120}
+            height={90}
             className='mr-3'
-            src='https://via.placeholder.com/150?text=no image'
+            src='https://via.placeholder.com/120x90?text=no image'
             alt='placeholder'
           />
         )}
         <Media.Body>
           <h5>{title}</h5>
           <p className='mb-0'>รายละเอียดเทคโนโลยีที่ให้บริการ</p>
-          {describe &&
-            describe.map((item, i) => {
+          {descriptions &&
+            descriptions.map((item, i) => {
               return (
                 <p key={`desc=${i}`} className='mb-0 ml-2 font-weight-light'>
                   - {item}
