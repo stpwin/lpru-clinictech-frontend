@@ -7,7 +7,7 @@ export const handleResponse = (response) => {
   if (contentType && contentType.indexOf("application/json") === -1) {
     console.warn("Response is not JSON format!");
     return null;
-  } 
+  }
 
   return response.text().then((text) => {
     let error;
@@ -36,11 +36,11 @@ export const handleResponse = (response) => {
 
 export const handleNotfound = (e) => {
   if (e instanceof TypeError) {
-    return Promise.reject(e)
+    return Promise.reject(e);
   }
   console.log("Fetch not found:", e);
   // throw e;
-  return null
+  return null;
 };
 
 export const handleFetchError = (e) => {
@@ -53,4 +53,8 @@ export const handleFetchError = (e) => {
 
 export const getSpecialistImage = (image) => {
   return `https://firebasestorage.googleapis.com/v0/b/lpru-clinictech.appspot.com/o/specialist_images%2F${image}?alt=media`;
+};
+
+export const getOwnerImage = (image) => {
+  return `https://firebasestorage.googleapis.com/v0/b/lpru-clinictech.appspot.com/o/owner_images%2F${image}?alt=media`;
 };
