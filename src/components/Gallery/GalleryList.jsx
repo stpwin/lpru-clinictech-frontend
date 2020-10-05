@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import { GalleryItem } from "../Card/CardItem";
 import Fetching from "../Fetching";
 import EmptyItem from "../Card/EmptyItem";
 import { connect } from "react-redux";
 import { galleryAction } from "../../actions";
 import { genGalleryLink } from "../../utils";
-
+import { getGalleryImage } from "../../helpers";
 export class GalleryList extends Component {
-
   componentDidMount() {
     this.props.fetchAllGallery();
   }
@@ -20,10 +19,14 @@ export class GalleryList extends Component {
       return (
         data &&
         data.map((item, i) => {
-          const dataWithLink = { ...item, linkTo: genGalleryLink (item.id)};
+          const dataWithLink = {
+            ...item,
+            linkTo: genGalleryLink(item.id),
+            thumdbImg: item.thumdbImg && getGalleryImage(item.thumdbImg)
+          };
           return (
             <GalleryItem
-              className='p-3 card-item'
+              className="p-3 card-item"
               key={`gallery-${i}`}
               {...dataWithLink}
             />
@@ -40,13 +43,13 @@ const mapStateToProps = (state) => {
   return {
     fetching,
     data,
-    error,
+    error
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchAllGallery: () => dispatch(galleryAction.fetchAll()),
+    fetchAllGallery: () => dispatch(galleryAction.fetchAll())
   };
 };
 

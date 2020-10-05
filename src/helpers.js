@@ -58,3 +58,9 @@ export const getSpecialistImage = (image) => {
 export const getOwnerImage = (image) => {
   return `https://firebasestorage.googleapis.com/v0/b/lpru-clinictech.appspot.com/o/owner_images%2F${image}?alt=media`;
 };
+export const getNewsImage = (image) => {
+  return `https://firebasestorage.googleapis.com/v0/b/lpru-clinictech.appspot.com/o/news_images%2F${image}?alt=media`;
+};
+export const getGalleryImage = (image) => {
+  return `https://firebasestorage.googleapis.com/v0/b/lpru-clinictech.appspot.com/o/gallery_images%2F${image}?alt=media`;
+};
