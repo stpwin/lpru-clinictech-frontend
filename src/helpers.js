@@ -1,15 +1,15 @@
-export const handleResponse = (response) => {
+export const handleResponse = async (response) => {
   if (response.status === 204) {
     return null;
   }
 
   const contentType = response.headers.get("content-type");
   if (contentType && contentType.indexOf("application/json") === -1) {
-    console.warn("Response is not JSON format!");
-    return null;
+    console.warn("Response is not JSON format!", await response.text());
+    return Promise.reject("ข้อมูลไม่ถูกต้อง");
   }
 
-  return response.text().then((text) => {
+  return await response.text().then((text) => {
     let error;
     let data = {};
     if (text) {
@@ -17,18 +17,14 @@ export const handleResponse = (response) => {
         data = JSON.parse(text);
         error = data.error;
       } catch {
-        console.warn("Parse JSON fail!");
+        console.warn("Parse JSON fail!", text);
         data = null;
-        error = '{"error":"Parse JSON fail!"}';
+        error = "ข้อมูลไม่ถูกต้อง";
       }
     }
-    if (!response.ok) {
-      // console.log(error)
-      return Promise.reject(
-        error
-          ? `${response.statusText} ${JSON.stringify(error, null, 4)}`
-          : ` ${response.statusText}`
-      );
+    if (!response.ok || error) {
+      // console.log(error);
+      return Promise.reject(error);
     }
     return data;
   });
