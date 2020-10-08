@@ -1,20 +1,18 @@
-import React from "react";
 import firebase from "firebase/app";
 import "firebase/database";
 import "firebase/functions";
 import "firebase/auth";
 import { firebaseConfig } from "./firebaseConfig";
+import { ReactIsInDevelomentMode } from "./utils";
 
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 const functions = firebase.functions();
-const auth = firebase.auth();
+// const auth = firebase.auth();
 
-function ReactIsInDevelomentMode() {
-  return "_self" in React.createElement("div");
-}
+const IsDeveloment = ReactIsInDevelomentMode();
 
-if (ReactIsInDevelomentMode()) {
+if (IsDeveloment) {
   console.log("ReactIsInDevelomentMode");
   functions.useFunctionsEmulator("http://localhost:5001");
 } else {
@@ -22,14 +20,19 @@ if (ReactIsInDevelomentMode()) {
 }
 
 export const sendAsk = async (name, email, content) => {
-  console.log("Sign in as anonymously");
-  return auth.signInAnonymously().then(async (user) => {
-    await auth.currentUser.updateProfile({ displayName: name });
-    await auth.currentUser.updateEmail(email);
-    console.log({ user });
-    const sendMessage = functions.httpsCallable("sendMessage");
-    return sendMessage({ name, email, content });
-  });
+  const sendMessage = functions.httpsCallable(
+    IsDeveloment ? "sendMessageDev" : "sendMessage"
+  );
+  return sendMessage({ name, email, content });
+  // return auth.signInAnonymously().then(async (user) => {
+  //   await auth.currentUser.updateProfile({ displayName: name });
+  //   await auth.currentUser.updateEmail(email);
+  //   // console.log({ user });
+  //   const sendMessage = functions.httpsCallable(
+  //     IsDeveloment ? "sendMessageDev" : "sendMessage"
+  //   );
+  //   return sendMessage({ name, email, content });
+  // });
 };
 
 export const getWebContact = () => {

@@ -34,7 +34,7 @@ export const handleNotfound = (e) => {
   if (e instanceof TypeError) {
     return Promise.reject(e);
   }
-  console.log("Fetch not found:", e);
+  // console.log("Fetch not found:", e);
   // throw e;
   return null;
 };
