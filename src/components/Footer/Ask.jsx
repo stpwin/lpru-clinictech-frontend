@@ -1,80 +1,113 @@
-import React, { Component } from 'react'
-import { connect } from "react-redux";
-import { askAction } from "../../actions";
-
+import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
 
 export class Ask extends Component {
   state = {
     name: "",
     email: "",
-    body: ""
-  }
+    body: "",
+    fetching: false,
+    data: "",
+    error: "",
+    sent: false
+  };
+
   handleChange = (e) => {
     this.setState({
+      sent: false,
       [e.target.name]: e.target.value
-    })
-  }
+    });
+  };
+
   handleSubmit = () => {
     const { name, email, body } = this.state;
-    this.props.sendAsk(name, email, body);
-  }
+    this.setState({
+      fetching: true,
+      error: "",
+      data: "",
+      sent: false
+    });
+    this.props
+      .sendMessage(name, email, body)
+      .then((res) => {
+        // console.log(res);
+        this.setState({
+          fetching: false,
+          data: res,
+          sent: true,
+          name: "",
+          email: "",
+          body: ""
+        });
+      })
+      .catch((err) => {
+        // console.warn(err);
+        this.setState({
+          fetching: false,
+          error: { message: "ผิดพลาด" } || err
+        });
+      });
+  };
+
   render() {
-    const { name, email, body } = this.state
-    const { fetching, data, error} = this.props
+    const { sent, name, email, body, fetching, error } = this.state;
     return (
       <div>
-        <Form>
-          <Form.Group controlId='exampleForm.ControlInput1'>
+        <Form autoComplete="off">
+          <Form.Group>
             <Form.Control
-              type='text'
-              name='name'
-              placeholder='ชื่อ-สกุล'
+              disabled={fetching}
+              type="text"
+              name="name"
+              placeholder="ชื่อ-สกุล"
               value={name}
               onChange={this.handleChange}
             />
           </Form.Group>
-          <Form.Group controlId='exampleForm.ControlInput2'>
+          <Form.Group>
             <Form.Control
-              type='email'
-              name='email'
-              placeholder='อีเมล'
+              disabled={fetching}
+              type="email"
+              name="email"
+              placeholder="อีเมล"
               value={email}
               onChange={this.handleChange}
             />
           </Form.Group>
-          <Form.Group controlId='exampleForm.ControlTextarea1'>
+          <Form.Group>
             <Form.Control
-              as='textarea'
-              name='body'
+              disabled={fetching}
+              as="textarea"
+              name="body"
               rows={3}
-              placeholder='พิมพ์ข้อความ'
+              placeholder="พิมพ์ข้อความ"
               maxLength={500}
               value={body}
               onChange={this.handleChange}
             />
+            {error ? (
+              <Form.Text className="text-danger">{error.message}</Form.Text>
+            ) : null}
           </Form.Group>
-
-          {/* <Form.Group controlId='exampleForm.ControlTextarea1'>
-            <Form.Text className='text-danger'>
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group> */}
-
           {error ? (
-            <Button variant='primary' size='sm' onClick={this.handleSubmit}>
+            <Button variant="primary" size="sm" onClick={this.handleSubmit}>
               ส่งข้อความอีกครั้ง
             </Button>
           ) : fetching ? (
-            <Button variant='primary' size='sm' disabled={true}>
+            <Button variant="primary" size="sm" disabled={true}>
               กำลังส่งข้อความ
             </Button>
-          ) : data ? (
-            <Button variant='primary' size='sm' disabled={true}>
+          ) : sent ? (
+            <Button variant="primary" size="sm" disabled={true}>
               ส่งข้อความแล้ว
             </Button>
           ) : (
-            <Button variant='primary' size='sm' onClick={this.handleSubmit}>
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={this.handleSubmit}
+              disabled={!name || !email || !body}
+            >
               ส่งข้อความ
             </Button>
           )}
@@ -84,20 +117,4 @@ export class Ask extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { fetching, data, error } = state.ask;
-  return {
-    fetching,
-    data,
-    error,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    sendAsk: (name, email, body) =>
-      dispatch(askAction.sendAsk(name, email, body)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Ask);
+export default Ask;

@@ -1,23 +1,23 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-import { Container, Row, Col, Spinner } from 'react-bootstrap'
+import { Container, Row, Col, Spinner } from "react-bootstrap";
 
-import Contact from './Contact'
-import Ask from './Ask'
+import Contact from "./Contact";
+import Ask from "./Ask";
 
-import { getWebContact } from "../../firebaseApp";
+import { getWebContact, sendAsk } from "../../firebaseApp";
 
 export class Footer extends Component {
   state = {
-    fetchDone: false,
-  }
+    fetchDone: false
+  };
   componentDidMount() {
-    getWebContact().then(data => {
+    getWebContact().then((data) => {
       this.setState({
         ...data,
-        fetchDone: true,
+        fetchDone: true
       });
-    })
+    });
   }
   render() {
     const {
@@ -27,31 +27,37 @@ export class Footer extends Component {
       facebook,
       fax,
       place,
-      tel,
+      tel
     } = this.state;
     return (
       <footer>
-        <Container className='py-5'>
+        <Container className="py-5">
           <Row>
             <Col>
               <h5>คลินิกเทคโนโลยี มหาวิทยาลัยราชภัฏลำปาง</h5>
               {fetchDone ? (
                 <p>{footerText}</p>
               ) : (
-                <Spinner animation='border' variant='danger' />
+                <Spinner animation="border" variant="danger" />
               )}
             </Col>
             <Col>
               <h5>ติดต่อ</h5>
               {fetchDone ? (
-                <Contact email={email} facebook={facebook} fax={fax} place={place} tel={tel} />
+                <Contact
+                  email={email}
+                  facebook={facebook}
+                  fax={fax}
+                  place={place}
+                  tel={tel}
+                />
               ) : (
-                <Spinner animation='border' variant='danger' />
+                <Spinner animation="border" variant="danger" />
               )}
             </Col>
             <Col>
               <h5>สอบถาม</h5>
-              <Ask />
+              <Ask sendMessage={sendAsk} />
             </Col>
           </Row>
         </Container>
@@ -60,4 +66,4 @@ export class Footer extends Component {
   }
 }
 
-export default Footer
+export default Footer;
