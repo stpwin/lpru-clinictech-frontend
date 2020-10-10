@@ -25,8 +25,10 @@ export class Footer extends Component {
       fetchDone,
       email,
       facebook,
+      facebookName,
       fax,
       place,
+      placeName,
       tel
     } = this.state;
     return (
@@ -47,8 +49,10 @@ export class Footer extends Component {
                 <Contact
                   email={email}
                   facebook={facebook}
+                  facebookName={facebookName}
                   fax={fax}
                   place={place}
+                  placeName={placeName}
                   tel={tel}
                 />
               ) : (

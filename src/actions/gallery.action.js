@@ -33,12 +33,19 @@ export const fetchAll = () => {
 };
 
 export const fetchById = (id) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(request());
 
-    galleryService.fetchById(id).then(
-      (data) => {
-        dispatch(success(id, data));
+    galleryService.fetchInfo(id).then(
+      (info) => {
+        galleryService.fetchById(id).then(
+          (data) => {
+            dispatch(success(id, { ...data, ...info }));
+          },
+          (error) => {
+            dispatch(failure(error));
+          }
+        );
       },
       (error) => {
         dispatch(failure(error));
@@ -59,5 +66,5 @@ export const fetchById = (id) => {
 
 export const galleryAction = {
   fetchAll,
-  fetchById,
+  fetchById
 };

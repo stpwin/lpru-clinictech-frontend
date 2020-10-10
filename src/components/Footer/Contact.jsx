@@ -1,23 +1,31 @@
-import React, { Component } from 'react'
-import { ListGroup } from 'react-bootstrap'
+import React, { Component } from "react";
+import { ListGroup } from "react-bootstrap";
 import { FaPhone, FaFax, FaEnvelope, FaHome, FaFacebook } from "react-icons/fa";
 
 export class Contact extends Component {
   render() {
-    const { email, facebook, fax, place, tel } = this.props;
+    const {
+      email,
+      facebook,
+      facebookName,
+      fax,
+      place,
+      placeName,
+      tel
+    } = this.props;
     return (
       <div>
-        <ListGroup variant='flush'>
+        <ListGroup variant="flush">
           <ListGroup.Item>
             <FaPhone />{" "}
-            <a href={`tel:${tel}`} target='_blank' rel='noopener noreferrer'>
+            <a href={`tel:${tel}`} target="_blank" rel="noopener noreferrer">
               {tel}
               {/* 054-241052 */}
             </a>
           </ListGroup.Item>
           <ListGroup.Item>
             <FaFax />{" "}
-            <a href={`fax:${fax}`} target='_blank' rel='noopener noreferrer'>
+            <a href={`fax:${fax}`} target="_blank" rel="noopener noreferrer">
               {fax}
               {/* 054-241052 */}
             </a>
@@ -26,8 +34,8 @@ export class Contact extends Component {
             <FaEnvelope />{" "}
             <a
               href={`mailto:${email}`}
-              target='_blank'
-              rel='noopener noreferrer'
+              target="_blank"
+              rel="noopener noreferrer"
             >
               {email}
               {/* love_na_ant@hotmail.com */}
@@ -35,23 +43,14 @@ export class Contact extends Component {
           </ListGroup.Item>
           <ListGroup.Item>
             <FaFacebook />{" "}
-            <a
-              target='_blank'
-              rel='noopener noreferrer'
-              href={facebook}
-            >
-              คลินิกเทคโนโลยี คณะวิทยาศาสตร์ มหาวิทยาลัยราชภัฏลำปาง
+            <a target="_blank" rel="noopener noreferrer" href={facebook}>
+              {facebookName}
             </a>{" "}
           </ListGroup.Item>
           <ListGroup.Item>
             <FaHome />{" "}
-            <a
-              target='_blank'
-              rel='noopener noreferrer'
-              href={place}
-            >
-              คณะวิทยาศาสตร์ มหาวิทยาลัยราชภัฏลำปาง 119 ม.9 ต.ชมพู อ.เมือง
-              จ.ลำปาง 52100
+            <a target="_blank" rel="noopener noreferrer" href={place}>
+              {placeName}
             </a>
           </ListGroup.Item>
         </ListGroup>
@@ -60,4 +59,4 @@ export class Contact extends Component {
   }
 }
 
-export default Contact
+export default Contact;

@@ -1,11 +1,12 @@
 import { handleResponse, handleFetchError, handleNotfound } from "../helpers";
-import { apiServer } from "../config";
+import { storagePath, apiServer } from "../config";
+import { storage } from "../firebaseApp";
 
 const fetchAll = () => {
   const requestOptions = {
     method: "GET",
     headers: {
-      'Accept': 'application/json',
+      Accept: "application/json"
     }
   };
 
@@ -19,11 +20,15 @@ const fetchAll = () => {
 };
 
 const fetchById = (id) => {
+  return storage.ref(`${storagePath}gallery/${id}`).listAll();
+};
+
+const fetchInfo = (id) => {
   const requestOptions = {
     method: "GET",
     headers: {
-      Accept: "application/json",
-    },
+      Accept: "application/json"
+    }
   };
 
   return fetch(`${apiServer}/gallery/one.php?id=${id}`, requestOptions)
@@ -38,4 +43,5 @@ const fetchById = (id) => {
 export const galleryService = {
   fetchAll,
   fetchById,
+  fetchInfo
 };

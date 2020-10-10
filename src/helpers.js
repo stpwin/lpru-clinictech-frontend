@@ -1,3 +1,6 @@
+import { firebaseConfig } from "./firebaseConfig";
+import { storagePath } from "./config";
+
 export const handleResponse = async (response) => {
   if (response.status === 204) {
     return null;
@@ -48,15 +51,42 @@ export const handleFetchError = (e) => {
 };
 
 export const getSpecialistImage = (image) => {
-  return `https://firebasestorage.googleapis.com/v0/b/lpru-clinictech.appspot.com/o/specialist_images%2F${image}?alt=media`;
+  return `https://firebasestorage.googleapis.com/v0/b/${
+    firebaseConfig.storageBucket
+  }/o/${encodeURIComponent(storagePath)}specialist_images%2F${image}?alt=media`;
 };
 
 export const getOwnerImage = (image) => {
-  return `https://firebasestorage.googleapis.com/v0/b/lpru-clinictech.appspot.com/o/owner_images%2F${image}?alt=media`;
+  return `https://firebasestorage.googleapis.com/v0/b/${
+    firebaseConfig.storageBucket
+  }/o/${encodeURIComponent(storagePath)}owner_images%2F${image}?alt=media`;
 };
 export const getNewsImage = (image) => {
-  return `https://firebasestorage.googleapis.com/v0/b/lpru-clinictech.appspot.com/o/news_images%2F${image}?alt=media`;
+  return `https://firebasestorage.googleapis.com/v0/b/${
+    firebaseConfig.storageBucket
+  }/o/${encodeURIComponent(storagePath)}news_images%2F${image}?alt=media`;
 };
-export const getGalleryImage = (image) => {
-  return `https://firebasestorage.googleapis.com/v0/b/lpru-clinictech.appspot.com/o/gallery_images%2F${image}?alt=media`;
+
+export const getGalleryThumdbImage = (image) => {
+  return `https://firebasestorage.googleapis.com/v0/b/${
+    firebaseConfig.storageBucket
+  }/o/${encodeURIComponent(storagePath)}gallery_images%2F${image}?alt=media`;
+};
+
+export const getGalleryResizeImage = (id, image) => {
+  return `https://firebasestorage.googleapis.com/v0/b/${
+    firebaseConfig.storageBucket
+  }/o/${encodeURIComponent(
+    storagePath
+  )}gallery%2F${id}%2Fthumbs%2F${image}_300x300?alt=media`;
+};
+
+export const getGalleryImage = (id, image) => {
+  return `https://firebasestorage.googleapis.com/v0/b/${
+    firebaseConfig.storageBucket
+  }/o/${encodeURIComponent(storagePath)}gallery%2F${id}%2F${image}?alt=media`;
+};
+
+export const gcd = (a, b) => {
+  return b === 0 ? a : gcd(b, a % b);
 };

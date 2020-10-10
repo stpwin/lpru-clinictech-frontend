@@ -5,7 +5,7 @@ import EmptyItem from "../Card/EmptyItem";
 import { connect } from "react-redux";
 import { galleryAction } from "../../actions";
 import { genGalleryLink } from "../../utils";
-import { getGalleryImage } from "../../helpers";
+import { getGalleryThumdbImage } from "../../helpers";
 export class GalleryList extends Component {
   componentDidMount() {
     this.props.fetchAllGallery();
@@ -22,7 +22,7 @@ export class GalleryList extends Component {
           const dataWithLink = {
             ...item,
             linkTo: genGalleryLink(item.id),
-            thumdbImg: item.thumdbImg && getGalleryImage(item.thumdbImg)
+            thumdbImg: item.thumdbImg && getGalleryThumdbImage(item.thumdbImg)
           };
           return (
             <GalleryItem
