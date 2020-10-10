@@ -78,7 +78,7 @@ export const getGalleryResizeImage = (id, image) => {
     firebaseConfig.storageBucket
   }/o/${encodeURIComponent(
     storagePath
-  )}gallery%2F${id}%2Fthumbs%2F${image}_300x300?alt=media`;
+  )}gallery%2F${id}%2Fthumbs%2F${image}_250x250?alt=media`;
 };
 
 export const getGalleryImage = (id, image) => {

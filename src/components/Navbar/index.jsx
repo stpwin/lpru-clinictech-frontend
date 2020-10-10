@@ -24,6 +24,9 @@ export default class Navigation extends Component {
               บริการและหลักเกณฑ์
             </NavLink> */}
             <NavLink to="/specialist">ข้อมูลผู้เชี่ยวชาญ</NavLink>
+            <NavLink to="/news">ข่าวสาร</NavLink>
+            <NavLink to="/gallery">ภาพกิจกรรม</NavLink>
+            {/* <NavLink to="/specialist">ข้อมูลผู้เชี่ยวชาญ</NavLink> */}
             <NavLink to="/downloads">เอกสารดาวน์โหลด</NavLink>
             {/* <NavLink  to='/project'>
               โครงการ
