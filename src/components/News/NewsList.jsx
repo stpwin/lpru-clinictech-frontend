@@ -28,7 +28,7 @@ export class NewsList extends Component {
       return (
         data &&
         data.map((item, i) => {
-          console.log(item);
+          // console.log(item);
           const dataWithLink = {
             ...item,
             linkTo: genNewsLink(item.id),
